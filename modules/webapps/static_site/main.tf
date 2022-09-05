@@ -1,4 +1,4 @@
-# terraform provider: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/static_site
+# terraform provider: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/static_site_custom_domain
 
 terraform {
   required_providers {
@@ -7,12 +7,4 @@ terraform {
     }
   }
 
-}
-
-locals {
-  module_tag = {
-    "module" = basename(abspath(path.module))
-  }
-
-  tags = merge(var.base_tags, local.module_tag, var.tags)
 }

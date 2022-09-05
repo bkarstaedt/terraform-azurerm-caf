@@ -9,6 +9,8 @@ resource "azurecaf_name" "static_site" {
 }
 
 resource "azurerm_static_site" "static_site" {
+  depends_on = [azurerm_static_site_custom_domain.custom_domain]
+
   name                = azurecaf_name.static_site.result
   location            = var.location
   resource_group_name = var.resource_group_name
@@ -25,4 +27,13 @@ resource "azurerm_static_site" "static_site" {
       identity_ids = lower(var.identity.type) == "userassigned" ? local.managed_identities : null
     }
   }
+
+  # dynamic "custom_domains" {
+  #   for_each = try(var.custom_domains, null) == null ? [] : [1]
+
+  #   content {
+  #     domain_name         = var.custom_domains.domain_name
+  #     validation_type     = var.custom_domains.validation_type
+  #   }
+  # }
 }
