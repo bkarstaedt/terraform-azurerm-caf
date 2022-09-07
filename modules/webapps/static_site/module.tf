@@ -9,8 +9,6 @@ resource "azurecaf_name" "static_site" {
 }
 
 resource "azurerm_static_site" "static_site" {
-  depends_on = [azurerm_static_site_custom_domain.custom_domain]
-
   name                = azurecaf_name.static_site.result
   location            = var.location
   resource_group_name = var.resource_group_name
